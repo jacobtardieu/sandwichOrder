@@ -22,5 +22,14 @@ public class User extends Model {
 	
 	@Required
 	public boolean sodexo;
+
+	public User(int id_user, String name, String prenom, String email,
+			boolean sodexo) {
+		this.id_user = id_user;
+		this.name = name;
+		this.prenom = prenom;
+		this.email = email;
+		this.sodexo = sodexo;
+	}
 	
 }

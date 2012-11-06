@@ -18,10 +18,16 @@ public class Sandwich extends Model {
 	@Required
 	public float prix;
 	
-	public String toString() {
-		return name;
-		
+	public Sandwich(String name, String description, float prix) {
+		this.name = name;
+		this.description = description;
+		this.prix = prix;
+	}
 	
+	public Sandwich() {}
+
+	public String toString() {
+		return name;	
 	}
 	
 	

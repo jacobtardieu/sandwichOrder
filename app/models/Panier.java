@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 import play.cache.Cache;
 import play.data.validation.Required;
@@ -10,10 +11,11 @@ import play.db.jpa.Model;
 public class Panier extends Model{
 	
 	@Required
-	public int id_commande;
+	public Commande commande;
 	
 	@Required
-	public int id_sandwich;
+	@ManyToOne // Judicieux ?
+	public Sandwich sandwich;
 	
 	@Required
 	public int quantite;

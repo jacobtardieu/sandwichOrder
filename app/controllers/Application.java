@@ -11,7 +11,6 @@ public class Application extends Controller {
 
     public static void index() {
     	List<Sandwich> sandwiches = Sandwich.findAll();
-    	
         render(sandwiches);
     }
 
