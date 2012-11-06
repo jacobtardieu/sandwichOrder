@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/3/trunk/sandwichOrderEMN/app/views/errors
+END
+404.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/3/trunk/sandwichOrderEMN/app/views/errors/404.html
+END
+500.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/3/trunk/sandwichOrderEMN/app/views/errors/500.html
+END

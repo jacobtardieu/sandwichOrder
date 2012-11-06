@@ -1,0 +1,33 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<ul class="breadcrumb">
+	<li>#{a @Application.index()}Home#{/a}</li>
+</ul>
+
+#{if sandwiches}
+	<h1>Sandwiches disponibles</h1>
+	<br/>
+		#{list sandwiches, as:'sandwich'}
+		<div class="well">
+		<h2>
+			<a>${sandwich.name}</a>
+		</h2>
+		
+		${sandwich.description}
+		<br/>
+		Prix : ${sandwich.prix} €
+		
+		<a class="pull-right">Order this sandwich</a>	
+		</div>
+	
+		#{/list}
+	#{/if}
+	
+#{else}
+	<div>
+		Pas de sandwich disponible actuellement.
+	</div>
+#{/else}
+	
+	

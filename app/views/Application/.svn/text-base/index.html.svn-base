@@ -1,0 +1,11 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<ul>
+#{list sandwiches, as:'sandwich'}
+	<li>${sandwich.name}:${sandwich.description}
+#{/list}
+</ul>
+
+#{welcome /}
+<!-- #{welcome /}-->
