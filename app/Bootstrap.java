@@ -11,7 +11,7 @@ public class Bootstrap extends Job {
 		if(Sandwich.count() == 0) { // Check if the database is empty
 			Sandwich s1 = new Sandwich();
 			s1.name = "Sandwich1";
-			s1.description = "Description du sandwich1";
+			s1.description = "DDDDescription du sandwich1";
 			s1.prix=1;
 			s1.save();
 			
