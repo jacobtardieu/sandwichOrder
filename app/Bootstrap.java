@@ -23,7 +23,7 @@ public class Bootstrap extends Job {
 			
 			Sandwich s3 = new Sandwich();
 			s3.name = "Sandwich3";
-			s3.description = "Le meilleur des sandwiches";
+			s3.description = "Le meilleur des sandwiches avec du Caviar et autre";
 			s3.prix=2000;
 			s3.save();
 		}
