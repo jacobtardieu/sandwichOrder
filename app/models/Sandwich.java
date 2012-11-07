@@ -23,8 +23,8 @@ public class Sandwich extends Model {
 		this.description = description;
 		this.prix = prix;
 	}
-	
 	public Sandwich() {}
+	
 
 	public String toString() {
 		return name;	

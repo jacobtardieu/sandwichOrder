@@ -18,6 +18,7 @@ public class BasicTest extends UnitTest {
 		
 		assertNotNull(miam);
 		assertEquals("sand1", miam.name);
+		assertEquals("Le premier sandwich", miam.description);
 	}
 
 }
