@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>#{get 'title' /}</title>
-        <script src="@'/public/javascripts/jquery-1.8.2.js'}"
-        type="text/javascript" charset="${_response_encoding}"></script>
-        <script src="@{'/public/javascripts/bootstrap.js'}"
-        type="text/javascript" charset="${_response_encoding}"></script>
-        
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
-        
-        <style type="text/css">
-        	body {
-        		padding-top : 60px;
-        		padding-bottom : 40px;
-        		}
-        </style>
-        <link rel="stylesheet" media="screen"
-        href="@{'/public/stylesheets/bootstrap-responsive.css'}">
-        <link rel="stylesheet" media="screen"
-        href="@{'/public/stylesheets/bootstrap.css'}">
-    </head>
-    <body>
-    	<div>
-    	#{doLayout /}
-    	</div>
-    </body>
+<head>
+<title>#{get 'title' /}</title>
+<script src="@'/public/javascripts/jquery-1.8.2.js'}"
+	type="text/javascript" charset="${_response_encoding}"></script>
+<script src="@{'/public/javascripts/bootstrap.js'}"
+	type="text/javascript" charset="${_response_encoding}"></script>
+
+<link rel="stylesheet" media="screen"
+	href="@{'/public/stylesheets/main.css'}">
+
+
+<link rel="stylesheet" media="screen"
+	href="@{'/public/stylesheets/bootstrap-responsive.css'}">
+<link rel="stylesheet" media="screen"
+	href="@{'/public/stylesheets/bootstrap.css'}">
+
+<script type="text/javascript">
+	function buttonPressed(i) {
+		var btn = document.getElementById("btn"+i);
+		var ajt = document.getElementById(i);
+		btn.style.visibility = 'hidden';
+		ajt.style.visibility = 'visible';
+	}
+</script>
+</head>
+<body>
+#{doLayout /}
+
+</body>
 </html>

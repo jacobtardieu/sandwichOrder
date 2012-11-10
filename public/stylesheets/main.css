@@ -1,0 +1,32 @@
+.center { margin:auto ; max-width:1000px}
+
+.panier {
+    padding: 9px 0;
+    position:fixed;
+	top:135px;
+}
+
+.row-fluid > .span-fixed-sidebar {
+    margin-left: 290px;
+}
+
+.ajt{
+	position:absolute;
+	left:50px;
+}
+
+.choisir {
+	position:absolute;
+	z-index:1;
+}
+
+.nb {
+	width:50px;
+	position:absolute;
+}
+
+.count{
+	position:absolute;
+	z-index:2;
+	visibility:hidden;
+}
