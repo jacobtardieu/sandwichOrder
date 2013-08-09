@@ -1,4 +1,7 @@
 /tmp
+.DS_Store
+.project
+/db
 /modules
 /lib
 /test-result
