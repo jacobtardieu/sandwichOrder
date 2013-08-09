@@ -9,27 +9,27 @@ import play.db.jpa.Model;
 public class User extends Model {
 
 	@Required
-	public int id_user;
+	public String userid;
 	
 	@Required
-	public String name;
+	public String firstname;
 	
 	@Required
-	public String prenom;
-	
+	public String lastname;
+
 	@Required
 	public String email;
 	
 	@Required
-	public boolean sodexo;
+	public String status;
 
-	public User(int id_user, String name, String prenom, String email,
-			boolean sodexo) {
-		this.id_user = id_user;
-		this.name = name;
-		this.prenom = prenom;
+	public User(String userid, String firstname, String lastname, String email, String status) {
+		this.userid = userid;
+		this.firstname = firstname;
+		this.lastname = lastname;
 		this.email = email;
-		this.sodexo = sodexo;
+		this.status = status;
 	}
+
 	
 }

@@ -1,0 +1,66 @@
+#{extends 'main.html' /} #{set title:'Home' /}
+
+<div class="container-fluid center">
+	<div class="row">
+		#{if commandes}
+		<h1>Historique des Commandes</h1>
+
+		<div class="span11">
+
+			%{i=0; }% 
+			#{list commandes, as:'commande'}
+
+			<div class="well">
+			
+			<h2>Commande n°: ${commande.getId()} du ${commande.date}</h2>
+			
+					<table class="table" id="contentCommande${i}">
+				<TR>
+					<TH>Produit</TH>
+					<TH>Quantité</TH>
+					<TH>Prix</TH>
+				</TR>
+
+	
+
+				<TR>
+					<TH>Total : </TH>
+					<TD>${commande.nbSandwiches}</TD>
+					<tH>${commande.montant} €</tH>
+				</TR>
+
+</table>
+			
+			</div>
+		
+			<script>	
+		var quantiteTot${i} = 0;
+		var prixTot${i} = 0;
+		
+		$.post("@{Application.itemsCommande()}", {com: ${commande.toJSON().raw()}},
+			function( data ) {$("#contentCommande${i}").empty();
+			$("#contentCommande${i}").append("<TR><th>Produit</th> <th>Quantité</th><th>Prix</th></tr>");
+	        $.each(data, function(index, item){
+	        	$("#contentCommande${i}").append("<TR><td>"+
+	        			item.sandwich.name+"</td> <td>"+
+	        			item.quantite+ "</td> <td>"+
+	        			item.sandwich.prix*item.quantite+" €</td></TR>");
+	        	quantiteTot${i} = quantiteTot${i} + item.quantite;
+	        	prixTot${i} = prixTot${i} + item.sandwich.prix*item.quantite;
+	        });
+	        $("#contentCommande${i}").append("<TR><th>Total : </th> <th>"+quantiteTot${i}+"</th><th>"+prixTot${i}+" €</th></TR>");
+		});
+				
+		</script>
+		
+			%{i++; }%
+			#{/list}
+		</div>
+		#{/if}
+		#{else}
+				<h1>Vous n'avez pas fait de commande pour le moment.</h1>
+		#{/else}
+		
+
+	</div>
+</div>

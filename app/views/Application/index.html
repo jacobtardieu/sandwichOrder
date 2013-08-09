@@ -1,44 +1,66 @@
-#{extends 'main.html' /} #{set title:'Home' /} 
+#{extends 'main.html' /} #{set title:'Home' /} #{if
+status=="ADMIN-SODEXO"}
+<script type="text/javascript">
+<!--
+commandesRecap()
+//-->
+</script>
+#{/if} #{else}
 
-
-<ul class="breadcrumb">
-	<li>#{a @Application.index()}Home#{/a}</li>
-</ul>
 <div class="container-fluid center">
 	<div class="row">
 		#{if sandwiches}
 		<h1>Sandwiches disponibles</h1>
 
 		<div class="span9">
-		
-		   %{i=0;
-		   
-		   }%
+				<div class="alert alert-info alert-block">
+			<button type="button" class="close" data-dismiss="alert">X</button>
+			<strong>Information :</strong> Toute commande pour la journée en cours doit être passée avant 11h.
+			Au delà, cette possibilité vous est retirée.
+		</div>
+			%{int i=0;}% #{list sandwiches, as:'sandwich'} %{i++;}%
+			<script type="text/javascript">
+			var sandwich${i} = ${sandwich.toJSON().raw()}
+			</script>
 
-			<br /> #{list sandwiches, as:'sandwich'}
-			<div class="well">
-				<h2>
-					<a>${sandwich.name}</a>
-				</h2>
-				
-				%{i++;
-				}%
 
-				<p>
-					${sandwich.description} <br /> Prix : ${sandwich.prix} €
-				</p>
-				 
-				<div class="row">
-			        <div id="${i}" class="count span1 offset7" >
-			        <div class="btn btn-danger">-</div>
-			        <div class="btn btn-success ajt">+</div>
-			        </div>
-				
-					<div class="span1 offset7">
-						<div id="btn${i}" class="btn" onclick="buttonPressed(${i})">Choisir</div>
-					</div>
+
+			<div class="bubble">
+				<div class="rectangle">
+					<h2>${sandwich.name}</h2>
 				</div>
+				<div class="triangle-l"></div>
+				<div class="triangle-r"></div>
+				<div class="info">
+					<div class="row-fluid">
+						<div class="span4">
+							<!-- <h2>Ingrédients :</h2> -->
+							<p>${sandwich.description}</p>
+						</div>
 
+						<div class="span7">
+							<div class="prix offset5">
+								<div class="row-fluid">
+									<h3 class="span6">${sandwich.prix} €</h3>
+									<div class="span5 count">
+										<button onclick="addPanier(sandwich${i},-1)" class="btn">-</button>
+										<button onclick="addPanier(sandwich${i},1)"
+											class="btn btn-primary ajt">+</button>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+
+
+					</div>
+
+
+
+
+
+				</div>
 			</div>
 
 			#{/list} #{/if} #{else}
@@ -46,9 +68,135 @@
 
 			#{/else}
 		</div>
+
 		<div class="span3 offset9 well panier">
-			<h2>Panier</h2>
+			<div class="row-fluid">
+				<h2 class="panTitle span1">Panier</h2>
+				<div class="span1 offset9">
+					<a href="#" onclick="resetPanier()"><img class="refresh"
+						src="public/images/glyphicons_016_bin.png" /></a>
+				</div>
+				<!--  
+			<a href="#loadcartpop" data-toggle="modal"><img
+				class="saveCart loadcart"
+				src="public/images/glyphicons_209_cart_in.png" /></a> <a
+				href="#savecartpop" data-toggle="modal"><img
+				class="offset1 saveCart"
+				src="public/images/glyphicons_208_cart_out.png" /></a>
+			-->
+
+				<table class="table" id="contentPanier">
+					<TR>
+						<TH>Produit</TH>
+						<TH>Quantité</TH>
+						<TH>Prix</TH>
+					</TR>
+
+					<TR>
+						<TH>Total :</TH>
+						<TD>0</TD>
+						<tH>0 €</tH>
+					</TR>
+				</table>
+
+				<script type="text/javascript">
+				addPanier(null,0);
+				</script>
+
+
+				<a href="#orderPop" data-toggle="modal" class="btn offset1">Commander</a>
+
+			</div>
+
 		</div>
 	</div>
-
 </div>
+
+<div id="savecartpop" class="modal hide fade" style="display: none;">
+	<div class="modal-header">
+		<button class="close" data-dismiss="modal">×</button>
+		<h3>Sauvegarder le Panier</h3>
+	</div>
+	<div class="modal-body">
+		<table class="table">
+			<TR>
+				<TD>
+					<form>
+						<fieldset>
+							<legend>Nouveau Panier</legend>
+							<label>Nom du Panier :</label> <input type="text"
+								placeholder="Taper quelque chose ..."> <span
+								class="help-block">Rentrer ici un nom de panier pour
+								pouvoir le retrouver plus tard</span>
+						</fieldset>
+					</form>
+				</TD>
+				<TD>
+					<form>
+						<fieldset>
+							<legend>Panier Existant</legend>
+							<label>Nom du Panier :</label> <select>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+							</select> <span class="help-block">Sélectionner ici le nom d'un
+								panier pour le modifier</span>
+						</fieldset>
+					</form>
+				</TD>
+			</TR>
+		</table>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Fermer</a> <a href="#"
+			class="btn btn-primary">Sauvegarder</a>
+	</div>
+</div>
+
+<div id="loadcartpop" class="modal hide fade" style="display: none;">
+	<div class="modal-header">
+		<button class="close" data-dismiss="modal">×</button>
+		<h3>Charger un Panier</h3>
+	</div>
+	<div class="modal-body">
+
+		<label>Nom du Panier :</label> <select>
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+			<option>4</option>
+			<option>5</option>
+		</select> <span class="help-block">Sélectionner ici le nom d'un panier
+			pour le charger</span>
+
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Fermer</a> <a href="#"
+			class="btn btn-primary">Charger</a>
+	</div>
+</div>
+
+<div id="orderPop" class="modal hide fade" style="display: none;">
+	<div class="modal-header">
+		<button class="close" data-dismiss="modal">×</button>
+		<h3>Passer une commande</h3>
+	</div>
+	#{form @Application.commande()}
+	<div class="modal-body">
+		<fieldset>
+			<label>Date de mise à disposition de la commande :</label> <input
+				type="text" id="datepicker" name="date" /> <input type="hidden"
+				name="enregistrement" value="true" />
+		</fieldset>
+
+
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Fermer</a>
+		<button type="submit" class="btn btn-primary">Envoyer</button>
+	</div>
+	#{/form}
+</div>
+#{/else}

@@ -2,9 +2,12 @@
 
 <html>
 <head>
-<title>#{get 'title' /}</title>
-<script src="@'/public/javascripts/jquery-1.8.2.js'}"
+<!-- <title>#{get 'title' /}</title> -->
+<title>SandwichOrder</title>
+
+<script src="@{'/public/javascripts/jquery-1.8.2.js'}"
 	type="text/javascript" charset="${_response_encoding}"></script>
+
 <script src="@{'/public/javascripts/bootstrap.js'}"
 	type="text/javascript" charset="${_response_encoding}"></script>
 
@@ -16,18 +19,115 @@
 	href="@{'/public/stylesheets/bootstrap-responsive.css'}">
 <link rel="stylesheet" media="screen"
 	href="@{'/public/stylesheets/bootstrap.css'}">
+	
 
-<script type="text/javascript">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+    <script src="@{'public/javascripts/jquery.editinplace.packed.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <script type="text/javascript">
+
+    
+    $(function() {
+    	var currentTime = new Date()
+        $( "#datepicker" ).datepicker({
+        	dateFormat: "dd/mm/yy", 
+        	minDate: 0, 
+        	maxDate: "+1W",
+            beforeShowDay: function (date) {
+            	if (currentTime.getHours()>=11 && date.getDay()==currentTime.getHours()){
+            		return [false, ''];
+            	}
+                if (date.getDay() == 6 || date.getDay() == 0) {
+                    return [false, ''];
+                } else {
+                    return [true, ''];
+                }
+            }
+        });
+    });
+
 	function buttonPressed(i) {
-		var btn = document.getElementById("btn"+i);
+		var btn = document.getElementById("btn" + i);
 		var ajt = document.getElementById(i);
 		btn.style.visibility = 'hidden';
 		ajt.style.visibility = 'visible';
+		
 	}
+	
+	function addPanier(s,i) {
+		var quantiteTot = 0;
+		var prixTot = 0;
+		
+		$.post("@{Application.editPanier()}", {sandwich: s, quantite: i},
+			function( data ) {$("#contentPanier").empty();
+			$("#contentPanier").append("<TR><th>Produit</th> <th>Quantité</th><th>Prix</th></tr>");
+	        $.each(data, function(index, item){
+	        	$("#contentPanier").append("<TR><td>"+
+	        			item.sandwich.name+"</td> <td>"+
+	        			item.quantite+ "</td> <td>"+
+	        			item.sandwich.prix*item.quantite+" €</td></TR>");
+	        	quantiteTot = quantiteTot + item.quantite;
+	        	prixTot = prixTot + item.sandwich.prix*item.quantite;
+	        });
+	        $("#contentPanier").append("<TR><th>Total : </th> <th>"+quantiteTot+"</th><th>"+prixTot+" €</th></TR>");
+		});	
+	}
+	
+	function resetPanier(){
+		$.post("@{Application.viderPanier()}",
+				function( data ) {$("#contentPanier").empty();
+				$("#contentPanier").append("<TR><th>Produit</th> <th>Quantité</th><th>Prix</th></tr>");
+		        $("#contentPanier").append("<TR><th>Total : </th> <th>0</th><th>0</th></TR>");
+			});	
+	}
+	
+	function commandesRecap(){
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; 
+
+		var yyyy = today.getFullYear();
+		if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = dd+'/'+mm+'/'+yyyy;
+		
+		window.location.href="@{Sodexo.listerCommandes()}?date="+today;	
+	}
+	
 </script>
+
 </head>
 <body>
-#{doLayout /}
+
+	<div class="navbar navbar-fixed-top navbar-inverse">
+		<div class="navbar-inner">
+			<div class="center adjumenu">
+
+				<a class="brand" href="@{Application.index()}"><img src="../public/images/sandwich.png" />
+					SandWich Order</a>
+				
+				<ul class="nav">
+				#{if status=="ADMIN-SODEXO"}
+					<li><a href="javascript:commandesRecap()" >Commandes du jour</a></li>
+					<li><a href="@{Sodexo.listerSandwiches()}" >Administration des Sandwiches</a></li>
+				#{/if}
+				#{else}
+					<li><a href="@{Application.commande(false,null)}">Mes Commandes</a></li>
+				#{/else}				
+				</ul>
+				<ul class="nav pull-right">
+					<li class="dropdown username"><a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+											${firstname} ${lastname}<b class="carret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="@{Secure.logout()}">Déconnexion</a></li>
+						</ul>
+					</li>
+				</ul>	
+			</div>
+		</div>
+	</div>
+
+	<div class="contentpanel">#{doLayout /}</div>
+
 
 </body>
 </html>

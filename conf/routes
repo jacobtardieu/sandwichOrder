@@ -6,7 +6,7 @@
 GET     /                                       Application.index
 
 # Ignore favicon requests
-GET     /favicon.ico                            404
+GET     /favicon.ico                            404/Users/jacobtardieu/Dropbox/mines/A2S1/systeme_information/maitrise_oeuvre/Play/sandwichorder/conf/routes
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public

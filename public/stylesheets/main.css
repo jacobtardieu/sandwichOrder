@@ -1,23 +1,85 @@
-.center { margin:auto ; max-width:1000px}
+.center {
+	 margin:auto ;
+	 max-width:1000px 
+}
+
+.refresh{
+	position:absolute;
+	padding-top:15px;
+}
+
+.panTitle{
+	padding-left:12px;
+}
 
 .panier {
     padding: 9px 0;
     position:fixed;
-	top:135px;
+	top:115px;
 }
+
+.prix {
+   position:relative;
+   marging-bottom:50px
+   width:30%;
+   padding:1em 1.5em;
+   color:#fff;
+   background:#97C02F;
+   overflow:hidden;
+   top :-10px;é
+  	-moz-box-shadow: -2px 2px 8px rgba(0,0,0,0.3);
+  -khtml-box-shadow: -2px 2px 8px rgba(0,0,0,0.3);
+  -webkit-box-shadow: -2px 2px 8px rgba(0,0,0,0.3);	
+
+}
+
+.prix:before {
+   content:"";
+   position:absolute;
+   top:0;
+   right:0;
+   border-width:0 16px 16px 0;
+   border-style:solid;
+   border-color:#fff #fff #658E15 #658E15;
+   background:#658E15;
+   -webkit-box-shadow:0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
+   -moz-box-shadow:0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
+   box-shadow:0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
+   display:block; width:0; /* Firefox 3.0 damage limitation */
+}
+
+.prix.rounded {
+   -webkit-border-radius:5px 0 5px 5px;
+   -moz-border-radius:5px 0 5px 5px;
+   border-radius:5px 0 5px 5px;
+}
+
+
+
+
+
+.prix.rounded:before {
+   border-width:8px;
+   border-color:#fff #fff transparent transparent;
+   -webkit-border-bottom-left-radius:5px;
+   -moz-border-radius:0 0 0 5px;
+   border-radius:0 0 0 5px;
+}
+
+
 
 .row-fluid > .span-fixed-sidebar {
     margin-left: 290px;
 }
 
-.ajt{
-	position:absolute;
-	left:50px;
-}
-
 .choisir {
 	position:absolute;
 	z-index:1;
+}
+
+.pad{
+	margin-top:40px;
+	background-color:#f5f5f5;
 }
 
 .nb {
@@ -26,7 +88,146 @@
 }
 
 .count{
+	margin-top:15px;
+}
+
+.saveCart {
 	position:absolute;
-	z-index:2;
-	visibility:hidden;
+	top:37px;
+}
+
+.loadcart{
+	right:65px;
+}
+
+body {
+	padding:55px;
+}
+
+.adjmenu {
+	left:-50px;
+}
+
+/* Style des block de Sandwich */
+
+.bubble {
+	clear: both;
+	margin-bottom:50px;
+	width: 700px;
+	background: #fff;
+	-moz-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  -webkit-border-radius: 10px;
+	-moz-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+  -khtml-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);	
+	position: relative; 
+	z-index: 90; /* the stack order: displayed under ribbon rectangle (100) */
+}
+
+.rectangle {
+	background: #7f9db9;
+	height: 50px;
+	width: 730px;
+	position: relative;
+	left:-15px;
+	top: 30px;
+	float: left;
+	-moz-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+  -khtml-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+  -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+	z-index: 100; /* the stack order: foreground */
+}
+
+.rectangle h2 {
+	font-size: 30px;
+	color: #fff;
+	text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+	text-align: center;
+}
+
+.triangle-l {
+	border-color: transparent #7d90a3 transparent transparent;
+	border-style:solid;
+	border-width:15px;
+	height:0px;
+	width:0px;
+	position: relative;
+	left: -30px;
+	top: 65px;
+	z-index: -1; /* displayed under bubble */
+}
+
+.triangle-r {
+	border-color: transparent transparent transparent #7d90a3;
+	border-style:solid;
+	border-width:15px;
+	height:0px;
+	width:0px;
+	position: relative;
+	left: 700px;
+	top: 35px;
+	z-index: -1; /* displayed under bubble */
+}
+
+.info {
+	padding: 60px 25px 35px 25px;
+}
+
+.info h2 {
+	font-size: 20px;
+}
+
+.info p {
+	padding-top: 10px;
+	font-size: 14px;
+	line-height: 22px;
+}
+
+.info p a {
+	color: #c4591e;
+	text-decoration: none;
+}
+
+.info p a:hover {
+	text-decoration: underline;
+}
+
+.ajoutS{
+	margin-top:20px
+}
+
+#sodexo{
+	position: relative; /* on positionne le conteneur */
+	display: block; 
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    top:-50px;
+}
+
+#login{
+	position: relative; /* on positionne le conteneur */
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+    width: 270px;
+    top:-100px;
+}
+
+#daySelectL{
+	position:relative;
+	top:15px;
+	left:5px
+}
+
+.livraison{
+	position:relative;
+	top:15px;
+}
+
+.livraisonL{
+	position:relative;
+	top:25px;
+	left:20px;
 }
